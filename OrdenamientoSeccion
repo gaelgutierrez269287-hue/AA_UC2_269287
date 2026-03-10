@@ -1,0 +1,69 @@
+public class OrdenamientoSeleccion { // Declaración de la clase
+
+    public static void ordenar(int[] arr) { // Método que recibe el arreglo
+        for (int i = 0; i < arr.length - 1; i++) { 
+            // Este ciclo recorre el arreglo posición por posición
+
+            int indiceMinimo = i; 
+            // Suponemos que la posición actual tiene el valor más pequeño
+
+            for (int j = i + 1; j < arr.length; j++) { 
+                // Este ciclo busca el número más pequeño en el resto del arreglo
+
+                if (arr[j] < arr[indiceMinimo]) { 
+                    // Si encontramos un número menor que el mínimo actual
+
+                    indiceMinimo = j; 
+                    // Guardamos la posición del nuevo número mínimo
+                }
+            }
+
+            int auxiliar = arr[i]; 
+            // Guardamos temporalmente el valor actual
+
+            arr[i] = arr[indiceMinimo]; 
+            // Colocamos el número más pequeño encontrado en la posición actual
+
+            arr[indiceMinimo] = auxiliar; 
+            // Colocamos el valor guardado en la posición donde estaba el mínimo
+        }
+    }
+
+    public static void main(String[] args) { // Punto de inicio del programa
+        int[] numeros = {5, 3, 8, 1}; 
+        // Arreglo inicial con números desordenados
+
+        ordenar(numeros); 
+        // Se ejecuta el método de ordenamiento
+
+        for (int numero : numeros) { 
+            // Recorre cada elemento del arreglo ya ordenado
+
+            System.out.print(numero + " "); 
+            // Muestra los números en la consola separados por espacio
+        }
+    }
+}
+
+/*
+Análisis aproximado del número de operaciones:
+
+T(n) ≈ n² + n + 2
+
+Explicación:
+- El primer ciclo recorre todo el arreglo (n).
+- Dentro de él hay otro ciclo que busca el valor mínimo
+  en el resto de los elementos.
+- Debido a que un ciclo está dentro de otro, el número
+  total de comparaciones crece aproximadamente como n × n.
+
+Complejidad asintótica:
+
+O(n²)
+
+Interpretación:
+El algoritmo revisa repetidamente el arreglo para encontrar
+el elemento más pequeño y colocarlo en su posición correcta.
+Aunque realiza menos intercambios que el método burbuja,
+su tiempo de ejecución también crece de forma cuadrática.
+*/
