@@ -1,0 +1,64 @@
+public class OrdenamientoBurbuja { // Declaración de la clase
+
+    public static void ordenar(int[] arr) { // Método que recibe el arreglo de números
+        for (int i = 0; i < arr.length - 1; i++) { 
+            // Este ciclo controla cuántas veces se recorre el arreglo
+            // En cada pasada, el número más grande va quedando al final
+
+            for (int j = 0; j < arr.length - 1; j++) { 
+                // Este ciclo compara cada elemento con el que está a su derecha
+
+                if (arr[j] > arr[j + 1]) { 
+                    // Si el número actual es mayor que el siguiente,
+                    // se intercambian para que el menor quede primero
+
+                    int auxiliar = arr[j]; 
+                    // Guardamos temporalmente el valor actual
+
+                    arr[j] = arr[j + 1]; 
+                    // Colocamos el valor menor en la posición actual
+
+                    arr[j + 1] = auxiliar; 
+                    // Colocamos el valor guardado en la siguiente posición
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) { // Punto de inicio del programa
+        int[] numeros = {5, 3, 8, 1}; 
+        // Arreglo inicial con números desordenados
+
+        ordenar(numeros); 
+        // Se ejecuta el método de ordenamiento
+
+        for (int numero : numeros) { 
+            // Recorre cada elemento del arreglo ya ordenado
+
+            System.out.print(numero + " "); 
+            // Muestra los números en la consola separados por espacio
+        }
+    }
+}
+
+/*
+Análisis aproximado del número de operaciones:
+
+T(n) ≈ n² + 2n + 3
+
+Explicación:
+- El primer ciclo depende del tamaño del arreglo (n).
+- Dentro de él existe otro ciclo que también depende de n.
+- Debido a que uno está dentro del otro, las repeticiones
+  se multiplican aproximadamente n × n.
+
+Complejidad asintótica:
+
+O(n²)
+
+Interpretación:
+El tiempo que tarda el algoritmo en ordenar los datos crece
+de forma cuadrática. Esto ocurre porque cada elemento se
+compara repetidamente con los demás para colocarlo en su
+posición correcta dentro del arreglo.
+*/
