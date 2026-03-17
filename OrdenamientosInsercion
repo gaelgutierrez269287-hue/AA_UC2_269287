@@ -1,27 +1,37 @@
 public class Ordenamientos {
 
+    /**
+     * Algoritmo de Ordenamiento por Inserción
+     * @param arr Arreglo de enteros a ordenar
+     */
     public static void insercion(int[] arr) {
-        int n = arr.length; // 1 operación
+        int n = arr.length;                     // 1 op (asignación)
 
-        for (int i = 1; i < n; i++) { // 1 asignación + n comparaciones + n incrementos
-            int key = arr[i]; // n asignaciones
-            int j = i - 1; // n asignaciones
+        // El ciclo externo se ejecuta n veces
+        for (int i = 1; i < n; i++) {           // 1 op (asig) + n op (comp) + n-1 op (inc)
+            int key = arr[i];                   // 1 op (asignación + acceso)
+            int j = i - 1;                      // 1 op (asignación + resta)
 
-            // Comparar e insertar el elemento en su posición correcta
-            while (j >= 0 && arr[j] > key) { 
-                // Comparaciones: 2 por iteración
-                arr[j + 1] = arr[j]; // asignación
-                j = j - 1; // decremento
+            // El ciclo interno depende del estado del arreglo (Peor caso: n)
+            while (j >= 0 && arr[j] > key) {    // 2 op (comparaciones logicas)
+                arr[j + 1] = arr[j];            // 2 op (acceso + asignación)
+                j = j - 1;                      // 1 op (resta + asignación)
             }
 
-            arr[j + 1] = key; // asignación final
+            arr[j + 1] = key;                   // 1 op (suma + asignación)
         }
+        
+        /* * EXPRESIÓN ALGEBRAICA (Peor caso: Arreglo invertido):
+         * T(n) = 1 + (1 + n + n - 1) + (n - 1) * [2 + 2 + (sumatoria de j=1 hasta i de (2 + 2 + 1)) + 1]
+         * Simplificado: T(n) = an² + bn + c
+         * * COMPLEJIDAD ASINTÓTICA:
+         * El algoritmo tiene una complejidad O(n²) en el peor de los casos, 
+         * debido a los dos bucles anidados que dependen linealmente del tamaño del arreglo (n).
+         */
     }
 
-    public static void imprimir(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
+    public static void main(String[] args) {
+        int[] datos = {5, 3, 4, 1};
+        insercion(datos);
     }
 }
