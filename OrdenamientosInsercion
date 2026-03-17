@@ -1,0 +1,27 @@
+public class Ordenamientos {
+
+    public static void insercion(int[] arr) {
+        int n = arr.length; // 1 operación
+
+        for (int i = 1; i < n; i++) { // 1 asignación + n comparaciones + n incrementos
+            int key = arr[i]; // n asignaciones
+            int j = i - 1; // n asignaciones
+
+            // Comparar e insertar el elemento en su posición correcta
+            while (j >= 0 && arr[j] > key) { 
+                // Comparaciones: 2 por iteración
+                arr[j + 1] = arr[j]; // asignación
+                j = j - 1; // decremento
+            }
+
+            arr[j + 1] = key; // asignación final
+        }
+    }
+
+    public static void imprimir(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
