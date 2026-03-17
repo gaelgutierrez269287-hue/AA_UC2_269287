@@ -5,29 +5,48 @@ public class Ordenamientos {
      * @param arr Arreglo de enteros a ordenar
      */
     public static void insercion(int[] arr) {
+
         // Validación básica
         if (arr == null || arr.length <= 1) {
             return;
         }
 
-        int n = arr.length;
+        int n = arr.length;                     // 1 op (asignación)
 
-        for (int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i - 1;
+        // El ciclo externo se ejecuta n veces
+        for (int i = 1; i < n; i++) {           // 1 op (asig) + n op (comp) + n-1 op (inc)
+            int key = arr[i];                   // 1 op (asignación + acceso)
+            int j = i - 1;                      // 1 op (asignación + resta)
 
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j--;
+            // El ciclo interno depende del estado del arreglo (Peor caso: n)
+            while (j >= 0 && arr[j] > key) {    // 2 op (comparaciones logicas)
+                arr[j + 1] = arr[j];            // 2 op (acceso + asignación)
+                j = j - 1;                      // 1 op (resta + asignación)
             }
 
-            arr[j + 1] = key;
+            arr[j + 1] = key;                   // 1 op (suma + asignación)
         }
+        
+        /* 
+         * EXPRESIÓN ALGEBRAICA (Peor caso: Arreglo invertido):
+         * T(n) ≈ 1 + (1 + n + n - 1) + (n - 1) * [2 + 2 + (∑ desde j=1 hasta i de (2 + 2 + 1)) + 1]
+         * 
+         * Desarrollando la sumatoria:
+         * ∑(5) repetido i veces → 5i
+         * 
+         * Entonces:
+         * T(n) ≈ c1 + c2*n + c3*(n-1)*(5i + constantes)
+         * 
+         * Simplificando:
+         * T(n) = a*n² + b*n + c
+         * 
+         * COMPLEJIDAD ASINTÓTICA:
+         * - Mejor caso (arreglo ordenado): O(n)
+         * - Peor caso (arreglo invertido): O(n²)
+         * - Caso promedio: O(n²)
+         */
     }
 
-    /**
-     * Método para imprimir el arreglo
-     */
     public static void imprimir(int[] arr) {
         for (int num : arr) {
             System.out.print(num + " ");
