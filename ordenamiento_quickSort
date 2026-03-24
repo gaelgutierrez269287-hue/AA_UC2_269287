@@ -1,1 +1,52 @@
+package com.mycompany.mavenproject4;
 
+public class Ordenamientos {
+
+    // Método Quicksort
+    public static void quickSort(int[] arr, int low, int high) {
+
+        if (low < high) { // 1 comparación
+            int pi = partition(arr, low, high); // 1 asignación + llamada
+
+            quickSort(arr, low, pi - 1); // llamada recursiva
+            quickSort(arr, pi + 1, high); // llamada recursiva
+        }
+
+        // T(n) = T(k) + T(n-k-1) + O(n)
+    }
+
+    // Método de partición
+    public static int partition(int[] arr, int low, int high) {
+
+        int pivot = arr[high];   // 1 asignación
+        int i = low - 1;         // 1 asignación
+
+        // Ciclo se ejecuta n veces
+        for (int j = low; j < high; j++) { // n comparaciones + n incrementos
+
+            if (arr[j] < pivot) { // n comparaciones
+                i++; // n incrementos
+
+                // Intercambio (3 asignaciones)
+                int temp = arr[i]; // 1
+                arr[i] = arr[j];   // 1
+                arr[j] = temp;     // 1
+            }
+        }
+
+        // Intercambio final (3 asignaciones)
+        int temp = arr[i + 1]; // 1
+        arr[i + 1] = arr[high]; // 1
+        arr[high] = temp; // 1
+
+        return i + 1; // 1 retorno
+    }
+
+    // Método para imprimir arreglo
+    public static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}
