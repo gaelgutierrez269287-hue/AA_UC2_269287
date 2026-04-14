@@ -1,74 +1,80 @@
+package com.mycompany.mavenproject6;
+
 import java.util.Arrays;
 
-public class MergeSort {
+public class Ordenamientos {
 
     public static void main(String[] args) {
         int[] arreglo = {38, 27, 43, 3, 9, 82, 10};
-        
-        System.out.println("Arreglo original: " + Arrays.toString(arreglo));
+        System.out.println("Original: " + Arrays.toString(arreglo));
         
         ordenar(arreglo, 0, arreglo.length - 1);
         
-        System.out.println("Arreglo ordenado: " + Arrays.toString(arreglo));
+        System.out.println("Ordenado: " + Arrays.toString(arreglo));
     }
 
-    // Función principal que divide el arreglo
-    public static void ordenar(int[] arr, int izquierda, int derecha) {
-        if (izquierda < derecha) {
-            // Encuentra el punto medio
-            int medio = izquierda + (derecha - izquierda) / 2;
-
-            // Ordena la primera y segunda mitad
-            ordenar(arr, izquierda, medio);
-            ordenar(arr, medio + 1, derecha);
-
-            // Une las mitades ordenadas
-            merge(arr, izquierda, medio, derecha);
+    // Método principal de división (Recursivo)
+    public static void ordenar(int[] arr, int izq, int der) {
+        if (izq < der) { // 1 comparación
+            int m = izq + (der - izq) / 2; // 4 operaciones (asig, suma, resta, div)
+            
+            ordenar(arr, izq, m);     // Llamada recursiva T(n/2)
+            ordenar(arr, m + 1, der); // Llamada recursiva T(n/2)
+            
+            merge(arr, izq, m, der);  // Llamada al método de mezcla
         }
     }
 
-    // Función para mezclar los sub-arreglos
-    public static void merge(int[] arr, int izquierda, int medio, int derecha) {
-        // Tamaños de los sub-arreglos a unir
-        int n1 = medio - izquierda + 1;
-        int n2 = derecha - medio;
+    // Método para mezclar y ordenar (El corazón del algoritmo)
+    public static void merge(int[] arr, int izq, int m, int der) {
+        int n1 = m - izq + 1; // 3 operaciones (asig, resta, suma) [cite: 18]
+        int n2 = der - m;     // 2 operaciones (asig, resta) [cite: 18]
 
-        // Arreglos temporales
-        int[] L = new int[n1];
-        int[] R = new int[n2];
+        int L[] = new int[n1]; // 2 operaciones (creación, asig)
+        int R[] = new int[n2]; // 2 operaciones (creación, asig)
 
-        // Copiar datos a los arreglos temporales
-        for (int i = 0; i < n1; ++i) L[i] = arr[izquierda + i];
-        for (int j = 0; j < n2; ++j) R[j] = arr[medio + 1 + j];
+        // Copia de datos a arreglos temporales
+        for (int i = 0; i < n1; i++) { // 1 asig; n1+1 comp; n1 increm [cite: 19]
+            L[i] = arr[izq + i];       // 3 op. por iteración (asig, suma, acceso)
+        }
+        for (int j = 0; j < n2; j++) { // 1 asig; n2+1 comp; n2 increm
+            R[j] = arr[m + 1 + j];     // 4 op. por iteración (asig, suma, suma, acceso)
+        }
 
-        // Índices iniciales para recorrer L, R y el arreglo original
-        int i = 0, j = 0;
-        int k = izquierda;
+        int i = 0, j = 0; // 2 asignaciones
+        int k = izq;      // 1 asignación
 
-        // Comparación y mezcla
-        while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
-                arr[k] = L[i];
-                i++;
+        // Comparación y mezcla de los dos sub-arreglos
+        while (i < n1 && j < n2) { // 2 comparaciones + 1 lógico [cite: 19, 27]
+            if (L[i] <= R[j]) {    // 1 comparación + 2 accesos
+                arr[k] = L[i];     // 1 asignación + 2 accesos [cite: 35]
+                i++;               // 1 incremento
             } else {
-                arr[k] = R[j];
-                j++;
+                arr[k] = R[j];     // 1 asignación + 2 accesos
+                j++;               // 1 incremento
             }
-            k++;
+            k++;                   // 1 incremento
         }
 
-        // Copiar elementos restantes de L[] si los hay
-        while (i < n1) {
-            arr[k] = L[i];
-            i++;
-            k++;
+        // Copiar elementos restantes de L[] si existen
+        while (i < n1) {           // 1 comparación
+            arr[k] = L[i];         // 1 asignación + 2 accesos
+            i++; k++;              // 2 incrementos
         }
 
-        // Copiar elementos restantes de R[] si los hay
-        while (j < n2) {
-            arr[k] = R[j];
-            j++;
-            k++;
+        // Copiar elementos restantes de R[] si existen
+        while (j < n2) {           // 1 comparación
+            arr[k] = R[j];         // 1 asignación + 2 accesos
+            j++; k++;              // 2 incrementos
         }
+        
+        /* EXPRESIÓN ALGEBRAICA FINAL: 
+           T(n) = 2T(n/2) + n + c
+           Donde 'n' representa las comparaciones en el merge y 'c' las asignaciones constantes.
+           
+           NOTACIÓN ASINTÓTICA: O(n log n) [cite: 22]
+           Justificación: El algoritmo divide el problema a la mitad en cada nivel (log n) 
+           y realiza un trabajo lineal (n) para mezclar los elementos en cada nivel.
+        */
     }
 }
