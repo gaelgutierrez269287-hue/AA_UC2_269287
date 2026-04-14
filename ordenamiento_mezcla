@@ -1,0 +1,74 @@
+import java.util.Arrays;
+
+public class MergeSort {
+
+    public static void main(String[] args) {
+        int[] arreglo = {38, 27, 43, 3, 9, 82, 10};
+        
+        System.out.println("Arreglo original: " + Arrays.toString(arreglo));
+        
+        ordenar(arreglo, 0, arreglo.length - 1);
+        
+        System.out.println("Arreglo ordenado: " + Arrays.toString(arreglo));
+    }
+
+    // Función principal que divide el arreglo
+    public static void ordenar(int[] arr, int izquierda, int derecha) {
+        if (izquierda < derecha) {
+            // Encuentra el punto medio
+            int medio = izquierda + (derecha - izquierda) / 2;
+
+            // Ordena la primera y segunda mitad
+            ordenar(arr, izquierda, medio);
+            ordenar(arr, medio + 1, derecha);
+
+            // Une las mitades ordenadas
+            merge(arr, izquierda, medio, derecha);
+        }
+    }
+
+    // Función para mezclar los sub-arreglos
+    public static void merge(int[] arr, int izquierda, int medio, int derecha) {
+        // Tamaños de los sub-arreglos a unir
+        int n1 = medio - izquierda + 1;
+        int n2 = derecha - medio;
+
+        // Arreglos temporales
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Copiar datos a los arreglos temporales
+        for (int i = 0; i < n1; ++i) L[i] = arr[izquierda + i];
+        for (int j = 0; j < n2; ++j) R[j] = arr[medio + 1 + j];
+
+        // Índices iniciales para recorrer L, R y el arreglo original
+        int i = 0, j = 0;
+        int k = izquierda;
+
+        // Comparación y mezcla
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copiar elementos restantes de L[] si los hay
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // Copiar elementos restantes de R[] si los hay
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+}
