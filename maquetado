@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb</title>
+</head>
+<body>
+    <header>
+        <div>LOGO</div>
+        <nav>
+            <a href="airbnb.html">Todo</a>
+            <a href="alojamientos.html">Alojamientos</a>
+            <a href="experiencias.html">Experiencias</a>
+            <a href="servicios.html">Servicios</a>
+        </nav><!-- Menu 1 -->
+
+        <nav>
+            <a href="convertir-anfitrion.html">Conviertete en anfitrión</a>
+            <a href="lenguaje.html">🌐</a>
+            <a href="ayuda.html">Ayuda</a>
+        </nav><!-- Menu 2 -->
+
+        <search></search>
+    </header>
+    <main>
+
+        <!-- Sección: Alojamientos populares (bloque verde) -->
+        <section>
+
+            <!-- Encabezado de la sección: título + controles del carrusel -->
+            <header>
+                <h2>
+                    <a href="https://www.airbnb.mx/s/Playa-del-Carmen/homes">
+                        Alojamientos populares en Playa del Carmen
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </h2>
+                <nav aria-label="Controles del carrusel">
+                    <button type="button" aria-label="Anterior" disabled>‹</button>
+                    <button type="button" aria-label="Siguiente">›</button>
+                </nav>
+            </header>
+
+            <!-- Artículo 1 (bloque rojo) -->
+            <article>
+                <a href="alojamiento-1.html">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop" alt="Sala con sofá gris y puerta al jardín" width="300" height="280">
+                        <figcaption>Favorito entre huéspedes</figcaption>
+                    </figure>
+                </a>
+                <button type="button" aria-label="Agregar a favoritos">♥</button>
+                <h3>Departamento en Centro</h3>
+                <p>
+                    <time datetime="2026-09-25">25</time>–<time datetime="2026-09-27">27 de sep</time>
+                </p>
+                <p>
+                    <span>$3,732 MXN en total</span> ·
+                    <span aria-label="Calificación 4.93">★ 4.93</span>
+                </p>
+            </article>
+
+            <!-- Artículo 2 -->
+            <article>
+                <a href="alojamiento-2.html">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop" alt="Fachada blanca de departamento en Playacar" width="300" height="280">
+                        <figcaption>Favorito entre huéspedes</figcaption>
+                    </figure>
+                </a>
+                <button type="button" aria-label="Agregar a favoritos">♥</button>
+                <h3>Departamento en Playacar</h3>
+                <p>
+                    <time datetime="2026-09-25">25</time>–<time datetime="2026-09-27">27 de sep</time>
+                </p>
+                <p>
+                    <span>$2,996 MXN en total</span> ·
+                    <span aria-label="Calificación 4.84">★ 4.84</span>
+                </p>
+            </article>
+
+            <!-- Artículo 3 -->
+            <article>
+                <a href="alojamiento-3.html">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=800&auto=format&fit=crop" alt="Residencia en Playa del Carmen" width="300" height="280">
+                    </figure>
+                </a>
+                <button type="button" aria-label="Agregar a favoritos">♥</button>
+                <h3>Residencia en Playa del Carmen</h3>
+                <p>
+                    <time datetime="2026-10-02">2</time>–<time datetime="2026-10-04">4 de oct</time>
+                </p>
+                <p>
+                    <span>$3,258 MXN en total</span> ·
+                    <span aria-label="Calificación 5.0">★ 5.0</span>
+                </p>
+            </article>
+
+        </section>
+
+    </main>
+</body>
+</html>
